@@ -48,5 +48,6 @@ Navigate to the root of the project and run below commands :
 
 ## Screenshots
 
-![tests](https://i.imgur.com/abcdefg.png)
+https://i.imgur.com/abcdefg.png
+![home_before_login]https://imgur.com/J0F9a3k)
 
