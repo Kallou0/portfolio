@@ -47,7 +47,8 @@ Navigate to the root of the project and run below commands :
 - You won't be able to view map for the locations of users if you are not a superadmin
 
 ## Screenshots
+- Imgur (https://imgur.com/) is not loading the screenshots so I have created a folder "screenshots" in the root directory of the application
+- Check the screenshots to see the demo of the portfolio site
+- The names of the screenshots are self explanatory
 
-https://i.imgur.com/abcdefg.png
-![home_before_login]https://imgur.com/J0F9a3k)
 
