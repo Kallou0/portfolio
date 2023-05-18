@@ -1,0 +1,38 @@
+{% extends "account/account_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="content">
+  <div class="text">
+     Sign Up 
+  </div>
+  <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+     <div class="field">
+        <input type="email" name="email" id="id_email" autocomplete="email" required>
+        <span class="fas fa-user"></span>
+        <label>Email</label>
+     </div> <br>
+     <div class="field">
+        <input type="password" name="password1" id="id_password1" autocomplete="new-password" required>
+        <span class="fas fa-lock"></span>
+        <label>Password</label>
+     </div><br>
+     <div class="field">
+      <input type="password" name="password2" id="id_password2" autocomplete="new-password" required>
+      <span class="fas fa-lock"></span>
+      <label>Password (again)</label>
+   </div>
+     <button class="primaryAction" type="submit">Sign Up</button>
+     <div class="sign-up">
+        Already a member?
+        <a href="{{ login_url }}">sign in</a>
+     </div>
+  </form>
+</div>
+
+{% endblock %}

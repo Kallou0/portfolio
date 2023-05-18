@@ -1,0 +1,39 @@
+{% extends "account/account_base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+<div class="content">
+    <div class="text">
+       Login 
+    </div>
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+       <div class="field">
+          <input type="email" name="login" id="id_login" autocomplete="email" required>
+          <span class="fas fa-user"></span>
+          <label>Email</label>
+       </div> <br>
+       <div class="field">
+          <input type="password" name="password" id="id_password" autocomplete="password" required>
+          <span class="fas fa-lock"></span>
+          <label>Password</label>
+       </div>
+       <div class="forgot-pass">
+          <a href="{% url 'account_reset_password' %}">Forgot Password?</a>
+       </div>
+       <button class="primaryAction" type="submit">Sign in</button>
+       <div class="sign-up">
+          Not a member?
+          <a href="{{ signup_url }}">signup now</a>
+       </div>
+    </form>
+ </div>
+
+{% endblock %}
+

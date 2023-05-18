@@ -1,0 +1,128 @@
+
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+
+{% load static %}
+
+<div class="container-fluid">
+<div class ="profile" style="height: 190px;">
+<div class="profile-info">
+
+    <h3 class ="name">Hey I'm {{profile.first_name}}</h3>
+    {% if profile.designation != None %}
+    <h6 class="card-subtitle mb-2 text-muted">{{ profile.designation}}</h6>
+    {% else %}
+    <h6 class="card-subtitle mb-2 text-muted">Software Engineer</h6>
+    <h6 class="card-subtitle mb-2 text-muted"> <i class="fa-phone"></i> Call {{profile.phone_number}}</h6>
+    <h6 class="card-subtitle mb-2 text-muted"> <i class="fa-mail-reply"></i> Email {{profile.email}}</h6>
+    {% endif %}
+    
+</div>
+
+<div class="containermy-4">
+    <div class="row text-center">
+      <div class="col-md-6 mb-4">
+        <img class="rounded-circle avatar"  src="{% static 'img/myicon1.jpg' %}" height="170px" data-holder-rendered="true">
+      </div>
+    </div>
+</div>
+
+</div>
+
+<hr>
+
+
+<h4 id="project-header">My Projects</h4>
+
+<div class="card-group">
+
+  
+  <div class="row">
+    {% for project in projects %}
+  <div class="col-md-4">
+    <div class="card" style="width: 25rem;">
+        {% static "" as baseUrl %}
+      <img class="card-img-top" src="{% static 'img/project.png' %}" alt="project" height="190px">
+      <div class="card-body">
+        <h5 class="card-title">{{project.title}}</h5>
+        <p class="card-text">{{project.description}}</p>
+        <a href={{project.github_link}} class="btn btn-primary" target="_blank">View code</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+  
+</div >
+<hr>
+
+<h4 id="skill-header" >My Skills</h4>
+
+<div class="div-border">
+
+    <div class="skills">
+    {% for skill in skills %}
+    <div class="skill">
+        <img id="skill-image" title={{skill.name}}  src={{skill.image}} alt={{skill.name}} class="skill-data">
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+
+<h3 align="center" class="resume-title">Professional Experience</h3>
+
+<section id="resume" class="resume">
+ <div class="col-lg-6">
+            {% for exp in experiences %}
+            <div class="resume-item">
+              <h4>{{exp.designation}}</h4>
+                  {% if exp.is_present %}
+                    <h5>{{exp.start_date}} - present</h5>
+                {% else %}
+                    <h5>{{exp.start_date}} - {{exp.end_date}}</h5>
+                {% endif %}
+
+              <p><em>{{exp.company}}, {{exp.location}} </em></p>
+              <ul>
+                  {% if exp.responsibilities_1 is not None %}
+                    <li>{{exp.responsibilities_1}}</li>
+                  {% endif %}
+                  {% if exp.responsibilities_2 %}
+                    <li>{{exp.responsibilities_2}}</li>
+                  {% endif %}
+                  {% if exp.responsibilities_3 %}
+                    <li>{{exp.responsibilities_3}}</li>
+                  {% endif %}
+                  {% if exp.responsibilities_4 %}
+                    <li>{{exp.responsibilities_4}}</li>
+                  {% endif %}
+
+
+
+              </ul>
+            </div>
+            {% endfor %}
+
+          </div>
+
+</section>
+
+<hr>
+
+<div class="contact">
+    <h3 align="center">Connect with me </h3>
+    <form action="{% url 'contact' %}" method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Send Now</button>
+  </form>
+</div>
+
+</div>
+
+
+ {% endblock %}
+

@@ -1,0 +1,48 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  {% load leaflet_tags %}
+  <meta charset="utf-8">
+  <title>Map of Users</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="map" style="height: 600px;"></div>
+
+  <script>
+    // Initialize the map
+    var mymap = L.map('map').setView([37.7749, -122.4194], 13);
+
+    // Add a tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18
+    }).addTo(mymap);
+
+    // Retrieve the user data from the server
+    var users = {{ users|safe }};
+
+    // Define a function to create a marker icon for each user
+    function createIcon(user) {
+      return L.icon({
+        iconUrl: user.marker_icon_url,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [0, -35]
+      });
+    }
+
+    // Add a marker for each user
+    for (var i = 0; i < users.length; i++) {
+      var user = users[i];
+      var markerIcon = createIcon(user);
+      var marker = L.marker([user.location.coordinates[1], user.location.coordinates[0]], { icon: markerIcon }).addTo(mymap);
+      marker.bindPopup('<b>' + user.first_name + ' ' + user.last_name + '</b>');
+    }
+  </script>
+</body>
+</html>
